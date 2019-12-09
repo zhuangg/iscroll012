@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="iscroll.Veb.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0
+        }
+        #view{
+            position: absolute;
+            top:0;
+            bottom:0;
+            width:100%;
+        }
+        p{
+            padding:5px 10px
+        }
+        #tip{
+            height:50px;
+            line-height: 50px;
+            text-align: center;
+            color:#666;
+            background: #dedede
+        }
+    </style>
+</head>
+<body>
+    <div id="view">
+        <div id="box">
+            <div id="tip">下拉刷新</div>
+            <div id="list">
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+                    <p>hello iScroll</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+var sT;
+
+var isc=new iScroll("view",{
+    // 向上偏移多少像素
+    topOffset:50,
+    useTransition:true,
+    y:-50,
+    onScrollMove:function(){
+        if(this.y>100){
+            tip.innerHTML="松开刷新";
+            // 修改顶部回弹点
+            this.minScrollY=0;
+        }else{
+            tip.innerHTML="下拉刷新";
+            this.minScrollY=-50;
+        }
+    },
+    onScrollEnd:function(){
+        if(this.minScrollY==0){
+
+            tip.innerHTML="正在刷新中";
+            clearTimeout(sT);
+            //开始请求数据
+            sT=setTimeout(function(){
+                
+                var html="";
+                for(var i=0;i<50;i++){
+                    html+="<p>new Element "+new Date().getTime()+"</p>";
+                }
+
+                list.innerHTML=html;
+
+                tip.innerHTML="刷新成功"
+                setTimeout(function(){
+                    isc.refresh();
+                },500)
+
+            },5000)
+
+        }
+    }
+});
+
+
+</script>
+</html>
